@@ -1,0 +1,224 @@
+
+body {
+  background-color: white;
+  color: black;
+}
+
+
+
+.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .navbar,
+.dark-mode .sidenav {
+  background-color: #1f1f1f;
+}
+
+.dark-mode .container,
+.dark-mode .modal-content {
+  background-color: #333;
+  color: #e0e0e0;
+}
+
+/* For dark mode */
+.dark-mode .message-card {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 22px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  white-space: normal;
+  max-width: 90%; /* Adjust the max-width as needed */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* For light mode or default */
+.message-card {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 22px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  white-space: normal;
+  max-width: 90%; /* Adjust the max-width as needed */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dark-mode .user-message {
+  background-color: #696969;
+  color: #e0e0e0;
+  padding: 20px;
+  width: 100%;
+  height: flex;
+}
+
+.dark-mode .assistant-message {
+  background-color: #333;
+  color: #e0e0e0;
+}
+
+.dark-mode .btn,
+.dark-mode .dropdown-content,
+.dark-mode .collapsible-header,
+.dark-mode .collapsible-body {
+  background-color: #1e88e5;
+  color: #e0e0e0;
+}
+
+.dark-mode .chip {
+  background-color: #424242;
+  color: #e0e0e0;
+}
+
+.dark-mode .chip .close {
+  color: #e0e0e0;
+}
+
+.dark-mode input,
+.dark-mode textarea {
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+.dark-mode .input-field label,
+.dark-mode .input-field input[type=text]:not(.browser-default),
+.dark-mode .input-field input[type=password]:not(.browser-default),
+.dark-mode .input-field input[type=email]:not(.browser-default),
+.dark-mode .input-field input[type=url]:not(.browser-default),
+.dark-mode .input-field input[type=tel]:not(.browser-default),
+.dark-mode .input-field input[type=number]:not(.browser-default),
+.dark-mode .input-field input[type=search]:not(.browser-default),
+.dark-mode .input-field textarea.materialize-textarea {
+  color: #e0e0e0;
+}
+
+.dark-mode .input-field input[type=text]:focus:not([readonly]),
+.dark-mode .input-field input[type=password]:focus:not([readonly]),
+.dark-mode .input-field input[type=email]:focus:not([readonly]),
+.dark-mode .input-field input[type=url]:focus:not([readonly]),
+.dark-mode .input-field input[type=tel]:focus:not([readonly]),
+.dark-mode .input-field input[type=number]:focus:not([readonly]),
+.dark-mode .input-field input[type=search]:focus:not([readonly]),
+.dark-mode .input-field textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #1e88e5;
+  box-shadow: 0 1px 0 0 #1e88e5;
+}
+
+.dark-mode .message-icon {
+  color: #e0e0e0;
+}
+
+.dark-mode .modal {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* styles.css */
+:root {
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --secondary-text-color: #b0b0b0;
+  --highlight-color: #bb86fc;
+  --button-background: #333333;
+  --button-hover: #444444;
+  --border-color: #282828;
+}
+
+body.dark-mode {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+body.dark-mode .navbar {
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-mode .container {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+
+
+body.dark-mode .message-icon {
+  color: var(--highlight-color);
+}
+
+body.dark-mode .btn, body.dark-mode .btn:hover {
+  background-color: var(--button-background);
+  color: var(--text-color);
+}
+
+body.dark-mode .btn:hover {
+  background-color: var(--button-hover);
+}
+
+body.dark-mode .chip {
+  background-color: var(--button-background);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+body.dark-mode .collapsible-header, body.dark-mode .collapsible-body {
+  background-color: var(--button-background);
+  color: var(--text-color);
+}
+
+body.dark-mode .dropdown-content {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+body.dark-mode textarea {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+body.dark-mode .modal {
+  background-color: var(--button-background);
+  color: var(--text-color);
+}

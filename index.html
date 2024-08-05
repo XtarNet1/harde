@@ -1,0 +1,338 @@
+<!DOCTYPE html><html><head>
+    <title>GPT4Chat</title>
+    <!-- prefetch fetch -->
+
+    <link rel="stylesheet" href="css/materialize.min.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="manifest" href="/manifest.json">
+    
+    <script src="js/scoped.js">    </script>
+    <script src="js/babel.min.js"></script>
+    <script src="js/minified.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://bimbosuper.altervista.org/materialize-dark.css"> -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-WT3VZNT7E6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-WT3VZNT7E6');
+    </script>
+    
+</head>
+
+<body>
+   
+    
+         
+    <div id="app">
+        <li>
+            <a id="dark-mode-toggle" class="waves-effect waves-light btn">Toggle Dark Mode by Monu Kumar Sharma</a>
+        </li>
+        <android-notifications v-if="isApp" v-show="params.page=='androidNotifications'"></android-notifications>
+        <div v-show="params.page!='androidNotifications' &amp;&amp; params.page!='assistant-commands'" class="chat">
+            <style scoped="" src="chat.css">
+
+            </style>
+            <div id="permissionModal" class="modal">
+                <div class="modal-content">
+                    <h4>Microphone Permission</h4>
+                    <p>Please accept microphone permission to enable voice chat</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">OK</a>
+                </div>
+            </div>
+
+
+
+            <div>
+                <div id="chat-container" class="container" style="min-height: calc(100vh - 100px); margin-bottom: 0px; align-items: center; ">
+                    
+                    
+                    
+                    <style>
+                      
+
+
+
+ 
+             
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+#app {
+    padding-bottom: 80px; /* Height of the fixed footer */
+}
+
+.chat-input-form {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background-color: #f5f5f500;
+    z-index: 1000;
+}
+
+body.dark-mode .chat-input-form {
+    background-color: #33333300;
+}
+
+.message-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    background-color: #ebebeb;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+
+
+body.dark-mode .message-container {
+    background-color: #444;
+    border: 1px solid #070707;
+}
+
+.user-input {
+    flex-grow: 1;
+   
+    outline: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #000000;
+    resize: none;
+    overflow: hidden;
+    min-height: 40px;
+    max-height: 200px;
+    border: 2px solid #c2c2c2;
+}
+
+body.dark-mode .user-input {
+    background-color: #555;
+    color: #e0e0e0;
+    border: 2px solid #000000;
+}
+
+.send-button {
+    margin-left: 10px;
+    padding: 10px 20px;
+   background-color: black;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.attachment-container {
+    display: flex;
+    align-items: center;
+}
+
+.attachment-button, .mic-button, .stop-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #000000;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+body.dark-mode .attachment-button, 
+body.dark-mode .mic-button, 
+body.dark-mode .stop-button {
+    background-color: #555;
+    color: #e0e0e0;
+}
+
+
+
+                 </style>
+                 
+                    
+                    
+                 <form @submit.prevent="sendMessage" class="chat-input-form">
+                    <div class="message-container">
+                        <textarea ref="userInput" v-model="data.userInput" id="user-input" placeholder="Type your message..." class="user-input"></textarea>
+                        <button v-if="data.userInput.length > 0" type="submit" class="send-button">Send</button>
+                        <div v-else class="attachment-container">
+                            <label for="file-upload" class="attachment-button">
+                                <i class="material-icons">attach_file</i>
+                                <input type="file" id="file-upload" style="display: none;" accept="*/*" @change="uploadImage">
+                            </label>
+                            <button type="button" class="mic-button" @click="toggleMic">
+                                <i class="material-icons">{{ micTime ? 'mic' : 'mic_off' }}</i>
+                            </button>
+                            <button type="button" class="stop-button" @click="stopReceiving(true)">
+                                <i class="material-icons">stop_circle</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+
+           
+
+
+
+
+
+
+
+
+
+
+                    <div style="overflow-x: auto; display: flex;" class="col">
+                        <div class="chip" v-for="chip in data.chips" @click="onChipClick(chip)">
+                            <span :style="chip.style" class="chip-s tooltip" :title="chip.tooltip || chip.name" data-position="top">{{chip.name}}</span>
+
+
+                            <i class="material-icons">{{chip.icon}}</i>
+                        </div>
+                    </div>
+
+
+                    <div id="chat-log" class="col s12" style="display: grid; ">
+                        <assistant-commands v-if="isApp &amp;&amp; messages.length==0 &amp;&amp; !isIos"></assistant-commands>
+                        
+                        <div v-if="bs.settings.debug" style="position: absolute; top: 50vh;left: 50%; transform: translate(-50%, -50%);">
+                            <a class="chip  blue fade-away" @click="pasteFromClipboard">Paste from Clipboard</a>
+                        </div>
+                        
+                       
+
+                        <div v-for="(message, index) in data.messages" :key="index" class="message-card" :class="message.role === 'user' ? 'user-message' : 'assistant-message'" v-if="!message._hidden || bs.settings.debug">
+                            <div :class="{ collapsed: message.role =='system' || message.role =='function' || message.function_call|| message._title  }" onclick="this.classList.remove('collapsed')">
+                                <img v-if="message.role === 'assistant' &amp;&amp; !message.function_call" class="message-icon" src="images/favicon.png" alt="Contact Photo" style="border-radius: 50%; width: 50px; height: 50px;">
+                                <i v-else="" class="material-icons message-icon">{{ message.template?.icon?message.template?.icon: message.role === 'assistant' ? 'account_circle' : message.role === 'user' ? 'person' : 'info' }}</i>
+                                <span class="right">
+                                    <a class="dropdown-trigger" :data-target="`dropdown-${index}`">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul :id="`dropdown-${index}`" class="dropdown-content">
+                                        <li><a @click="copyMessage(message)">Copy</a></li>
+                                        <li><a @click="editMessage(message)">Edit</a></li>
+                                        <li><a @click="deleteMessage(index)">Delete</a></li>
+                                        <li><a @click="readMessage(message)">Read</a></li>
+                                        <li><a @click="regenerateMessage(index)">{{ message.role === 'assistant' ? 'Continue' : 'Resend' }}</a></li>
+                                    </ul>
+                                </span>
+                                <textarea v-if="message._isEditing" tabindex="0" v-html="message.content" ref="editableSpan" @blur="saveEdit(message)" style="height: 200px;"></textarea>
+                                <span v-else="">
+                                    <span v-if="message._title" class="word-wrap" v-text="message._title"></span>
+                                    <span v-if="message.error" style="color: red; font-weight: bold;">{{ message.error }}</span>
+                                    <img v-if="message._image" :src="message._image" class="message-image" style="max-width: 70vw;">
+                                    <code class="word-wrap2 rendered-markdown" style="vertical-align: bottom;" v-html="marked(message.content?.[0]?.text??message.content??'')"></code>
+                                    <span class="message-name">{{ message.name || message.function_call?.name }}{{message.function_call?.arguments}}</span>
+
+                                    <div v-if="message._actions" class="message-actions">
+                                        <button v-for="(action, name) in message._actions" @click="action()" class="btn waves-effect waves-light">{{ name }}</button>
+                                    </div>
+                                </span>
+                           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/vue.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/engineer.js"></script>
+    <script src="js/androidFunctions.js"></script>
+    <script src="js/speechDetection.js"></script>
+    <script src="js/apigpt.js"></script>
+    <script src="js/apigptHF.js"></script>
+    <script src="js/similarity.js"></script>
+    <script src="js/highlight.min.js"></script>
+    <script src="js/purify.min.js"></script>
+    <script src="js/marked.min.js"></script>
+    <script src="js/index.umd.min.js"></script>
+    <link rel="stylesheet" href="css/default.min.css">
+    <script src="js/mermaid.min.js"></script>
+    <link rel="stylesheet" href="css/mermaid.min.css">
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    
+    darkModeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        localStorage.setItem('dark-mode', isDarkMode ? 'enabled' : 'disabled');
+    });
+
+    const darkModeSetting = localStorage.getItem('dark-mode');
+    if (darkModeSetting === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
+});
+
+    </script>
+    
+
+    <script src="js/settings.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/errors.js"></script>
+    <script src="js/generateAudio.js"></script>
+    <script src="js/generateAudioSpechify.js"></script>
+    <script src="js/generateAudio11Labs.js"></script>
+    <script src="js/generateAudio11LabsWebSockets.js"></script>
+    <script src="js/generateAudioMsEdge.js"></script>
+    <script src="js/createHtmlCodeModal.js"></script>
+    <script src="js/speechWhisperWrapper.js"></script>
+    <script src="js/speechWhisper.js"></script>
+    <script src="js/huggingFaceBlip.js"></script>
+    <script src="js/hive.js"></script>
+    <script src="js/androidNotifications.js"></script>
+    <script src="js/androidChat.js"></script>
+    <script src="js/android.js"></script>
+    <script src="js/gettingStarted.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/settingsRenderer.js"></script>
+    <script src="js/pdf.min.js"></script>
+    <script src="js/lz-string.min.js"></script>
+    
+
+
+<script defer="" src="js/ort.js"></script>
+<script defer="" src="js/bundle.min.js"></script>
+<script defer="" src="js/libflac.wasm.js"></script>
+
+</body></html>
